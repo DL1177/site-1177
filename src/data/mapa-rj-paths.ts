@@ -11,7 +11,7 @@ export interface MunicipioPath {
   d: string;
 }
 
-export const MAPA_RJ_VIEWBOX = '0 0 800 480';
+export const MAPA_RJ_VIEWBOX = '0 0 656 480';
 
 export const REGIOES_RJ_LISTA = [
   'Todas as Regiões',
