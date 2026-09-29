@@ -239,7 +239,7 @@ const fotosCidade = [
       <div class="flex items-center justify-between mb-3">
         <h4 id="modal-cidade-entregas-titulo" class="font-sans text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-[#123F8F]"></span>
-          <span>Entregas que Atendem a Cidade:</span>
+          <span>Principais Entregas e Equipamentos:</span>
         </h4>
         <span class="text-[11px] sm:text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">Polos & Ações</span>
       </div>
@@ -312,7 +312,7 @@ const fotosCidade = [
     // Popula dados no Pop-up
     if (nomeEl) nomeEl.textContent = cidade.nome;
     if (resumoEl) resumoEl.textContent = cidade.resumoLocal;
-    if (entregasTituloEl) entregasTituloEl.textContent = `Entregas que Atendem ${cidade.nome}:`;
+    if (entregasTituloEl) entregasTituloEl.textContent = 'Principais Entregas e Equipamentos:';
 
     if (cidade.emendasPagas) {
       if (box1Label) box1Label.textContent = `Recursos Destinados a ${cidade.nome}`;
@@ -378,7 +378,7 @@ const fotosCidade = [
     }
 
     if (shareWa) {
-      let texto = `🏥 *Dr. Luizinho 1177 — Entregas que Atendem ${cidade.nome}*\n\n`;
+      let texto = `🏥 *O que o Dr. Luizinho fez por ${cidade.nome} (1177)*\n\n`;
       if (cidade.emendasPagas) {
         texto += `💰 *Recursos Destinados à Saúde:* ${cidade.emendasPagas}\n`;
       }
@@ -386,7 +386,7 @@ const fotosCidade = [
         texto += `🏗️ *Recursos Garantidos / Obras:* ${cidade.emendasGarantidas}\n`;
       }
       if (cidade.entregasDiretas && cidade.entregasDiretas.length > 0) {
-        texto += `\n📍 *Entregas que Atendem ${cidade.nome}:*\n`;
+        texto += `\n📍 *Principais Entregas:*\n`;
         cidade.entregasDiretas.slice(0, 4).forEach(e => {
           let tit = e;
           let desc = '';
