@@ -13,6 +13,7 @@ export interface EpisodioCuidandoDeGente {
   youtubeUrl: string;
   fraseImpacto: string;
   sinopse: string;
+  chamadaPlaylist: string;
   badge: string;
   destaque?: boolean;
 }
@@ -28,6 +29,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=ivliQxs7eBU',
     fraseImpacto: 'Eu comecei a não conseguir ler direito, e foi piorando até chegar ao ponto de não conseguir mais sair sozinha. Operei no Instituto dos Olhos, um hospital de primeira linha, de primeiro mundo. No mesmo dia da cirurgia, quando tirei o tampão e abri os olhos, fiquei maravilhada porque eu estava enxergando novamente.',
     sinopse: 'Dona Rosangela recuperou sua visão e sua autonomia após cirurgia de catarata no Instituto, que realiza procedimentos dos mais simples aos mais complexos e ainda funciona como um centro de formação multiprofissional, unindo assistência, ensino e inovação.',
+    chamadaPlaylist: 'A volta da visão e da autonomia após cirurgia no SUS.',
     badge: 'Instituto Estadual dos Olhos',
     destaque: true,
   },
@@ -41,6 +43,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=LeqBHlc2WFM',
     fraseImpacto: 'Acolhimento de emergência do filho perto de casa, com retaguarda de UTI após 10 anos de obras paradas.',
     sinopse: 'Atendimento de emergência do filho no Hospital Regional Zilda Arns, destravado após 10 anos de abandono e hoje referência no Sul Fluminense.',
+    chamadaPlaylist: 'Socorro urgente do filho perto de casa no Sul Fluminense.',
     badge: 'Hospital Regional Zilda Arns',
   },
   {
@@ -53,6 +56,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=heI1KvTNMrk',
     fraseImpacto: 'Duas jovens sonhadoras com autonomia para planejar estudos, trabalho e o momento certo da família.',
     sinopse: 'Planejamento reprodutivo e autonomia pelo programa Acolhe RJ, que já beneficiou mais de 40 mil mulheres com implantes modernos pelo SUS.',
+    chamadaPlaylist: 'Autonomia feminina para planejar família e futuro.',
     badge: 'Programa Acolhe RJ',
   },
   {
@@ -65,6 +69,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=lF3A7r4WB3o',
     fraseImpacto: 'Tratamento de tumor no intestino com acolhimento humano ao lado de um grande amor de 42 anos.',
     sinopse: 'Tratamento de câncer perto de casa no Onco Baixada, com acolhimento humanizado e sem as exaustivas viagens até o Centro do Rio.',
+    chamadaPlaylist: 'Tratamento contra o câncer com dignidade e perto de casa.',
     badge: 'Onco Baixada',
   },
   {
@@ -77,6 +82,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=DOcMpkDhWGw',
     fraseImpacto: 'Neurocirurgias de precisão internacional pelo SUS que devolveram a vida e a esperança em casos raros.',
     sinopse: 'Cirurgia neurológica de emergência e diagnóstico preciso no Instituto Estadual do Cérebro, com padrão de ponta 100% pelo SUS.',
+    chamadaPlaylist: 'Cirurgias neurológicas de alta precisão pelo SUS.',
     badge: 'Instituto Estadual do Cérebro',
   },
   {
@@ -89,6 +95,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=BluBZk4ywso',
     fraseImpacto: 'A luta vitoriosa pela vida da pequena Liz Helena na maior UTI infantil pública do Brasil.',
     sinopse: 'Acolhimento da bebê prematura na UTI Pediátrica do Hospital Ricardo Cruz, unidade mantida em definitivo e ampliada para atender a Baixada.',
+    chamadaPlaylist: 'A vitória da bebê prematura na maior UTI infantil do país.',
     badge: 'Maior UTI Infantil do Brasil',
   },
   {
@@ -101,6 +108,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=NAEO97MBvzA',
     fraseImpacto: 'Socorro ágil após queda grave em casa: a rapidez do SAMU fez a diferença entre a vida e a morte.',
     sinopse: 'Socorro emergencial rápido após queda doméstica. Atendimento pelo SAMU 100% RJ que garantiu socorro imediato e transporte especializado.',
+    chamadaPlaylist: 'Socorro ágil do SAMU que fez a diferença pela vida.',
     badge: 'SAMU 100% RJ',
   },
   {
@@ -113,6 +121,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=P_8o-TKHVHQ',
     fraseImpacto: 'A rapidez para fazer um exame urgente e a complexidade para acompanhar um pós-operatório delicado.',
     sinopse: 'Atendimento ágil no maior centro de imagem da América Latina, construído pelo Dr. Luizinho num terreno abandonado às margens da Via Dutra para acolher as famílias que mais precisam.',
+    chamadaPlaylist: 'Exames de alta complexidade com rapidez na Baixada.',
     badge: 'Rio Imagem Baixada',
   },
   {
@@ -125,6 +134,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=malqhooVOg4',
     fraseImpacto: 'O momento mais importante da vida acompanhado com carinho, estrutura de excelência e dignidade.',
     sinopse: 'Prédio histórico que ficou fechado por mais de 10 anos devido ao descaso, até que o Dr. Luizinho reformou e adaptou a estrutura para criar uma nova sede da maternidade municipal voltada a gestações de alto risco.',
+    chamadaPlaylist: 'Partos de alto risco com cuidado e acolhimento humano.',
     badge: 'Maternidade Mariana Bulhões',
   },
   {
@@ -137,6 +147,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=h1X6Kp0Zn-s',
     fraseImpacto: 'Internado após uma arritmia severa, colocou o marca-passo em tempo hábil e segue ativo e saudável aos 88 anos.',
     sinopse: 'Cirurgia cardíaca de emergência para implante de marca-passo no IECAC, viabilizada pela espera reduzida e modernização dos equipamentos liderada pelo Dr. Luizinho à frente da Secretaria de Saúde.',
+    chamadaPlaylist: 'Marca-passo no coração e plena vitalidade aos 88 anos.',
     badge: 'IECAC Aloysio de Castro',
   },
   {
@@ -149,6 +160,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=ctmRPo0NFQs',
     fraseImpacto: 'A mudança de perfil na unidade que garantiu UTI materna e neonatal para o nascimento seguro do pequeno Isaac.',
     sinopse: 'Unidade que era subutilizada por não ter UTI materna nem neonatal foi reestruturada pelo Dr. Luizinho, garantindo a Daniele e a milhares de mulheres o direito de dar à luz com tranquilidade e retaguarda completa.',
+    chamadaPlaylist: 'Nascimento seguro com UTI materna e neonatal completa.',
     badge: 'Hospital Estadual da Mãe',
   },
   {
@@ -161,6 +173,7 @@ export const EPISODIOS_SERIE: EpisodioCuidandoDeGente[] = [
     youtubeUrl: 'https://www.youtube.com/watch?v=UIInTmyFWlI',
     fraseImpacto: 'Dos 144 kg à autonomia de realizar tarefas diárias sem dores e com plena disposição após o procedimento.',
     sinopse: 'Acompanhamento médico especializado e cirurgia no programa de bariátricas criado pelo Dr. Luizinho em 2017 no Hospital Estadual Carlos Chagas, tratando a obesidade com acolhimento e respeito no SUS.',
+    chamadaPlaylist: 'Dos 144 kg à autonomia e disposição para recomeçar.',
     badge: 'Programa de Bariátricas',
   },
 ];
