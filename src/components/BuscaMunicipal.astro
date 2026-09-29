@@ -97,27 +97,47 @@ const fotosCidade = [
         Clique no mapa ou busque sua cidade para ver as entregas e recursos investidos.
       </p>
 
-      <!-- Barra de Busca Centralizada e Compacta -->
-      <div class="max-w-md mx-auto relative bg-white rounded-2xl shadow-xl shadow-black/30 border border-white/20 p-1.5 sm:p-2 flex items-center gap-2">
-        <div class="pl-2 text-slate-400 flex items-center pointer-events-none">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+      <!-- Barra de Busca Centralizada com Dropdown Inteligente Customizado -->
+      <div id="container-busca-municipio" class="max-w-md mx-auto relative z-30">
+        <div class="bg-white rounded-2xl shadow-xl shadow-black/30 border border-white/20 p-1.5 sm:p-2 flex items-center gap-2 focus-within:ring-2 focus-within:ring-[#F15A29]/60 transition-all">
+          <div class="pl-2 text-slate-400 flex items-center pointer-events-none shrink-0">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="busca-municipio-input"
+            placeholder="Digite sua cidade (ex: Nova Iguaçu, Volta Redonda...)"
+            class="w-full py-2 pr-2 bg-transparent text-slate-900 text-base sm:text-sm font-semibold focus:outline-none placeholder:text-slate-400 placeholder:font-normal"
+            autocomplete="off"
+            enterkeyhint="search"
+          />
+          <button
+            id="btn-limpar-busca"
+            type="button"
+            class="hidden p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer shrink-0"
+            aria-label="Limpar busca"
+            title="Limpar busca"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
-        <input
-          type="text"
-          id="busca-municipio-input"
-          list="lista-municipios"
-          placeholder="Digite sua cidade (ex: Nova Iguaçu, Volta Redonda...)"
-          class="w-full py-2 pr-3 bg-transparent text-slate-900 text-base sm:text-sm font-semibold focus:outline-none placeholder:text-slate-400 placeholder:font-normal"
-          autocomplete="off"
-          enterkeyhint="search"
-        />
-        <datalist id="lista-municipios">
-          {municipios.map((m) => (
-            <option value={m.nome} />
-          ))}
-        </datalist>
+
+        <!-- Dropdown Customizado de Municípios (Abre no primeiro clique, sem sumir) -->
+        <div
+          id="dropdown-municipios"
+          class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl shadow-black/40 border border-slate-200/90 overflow-hidden z-50 text-slate-900 text-left transition-all"
+        >
+          <div class="px-3.5 py-2 bg-slate-50 border-b border-slate-100 flex items-center justify-between text-[11px] font-bold text-slate-500 uppercase tracking-wider select-none">
+            <span>Selecione seu município</span>
+            <span class="text-[#F15A29]">{municipios.length} cidades do RJ</span>
+          </div>
+          <ul id="dropdown-lista" class="max-h-64 sm:max-h-72 overflow-y-auto divide-y divide-slate-50">
+          </ul>
+        </div>
       </div>
 
       <!-- Atalhos para Cidades Estratégicas em Vidro Translúcido -->
@@ -251,6 +271,10 @@ const fotosCidade = [
 <!-- Script do Pop-up e Sincronização com o Mapa -->
 <script define:vars={{ municipios, baseUrl }}>
   const input = document.getElementById('busca-municipio-input');
+  const containerBusca = document.getElementById('container-busca-municipio');
+  const dropdown = document.getElementById('dropdown-municipios');
+  const dropdownLista = document.getElementById('dropdown-lista');
+  const btnLimpar = document.getElementById('btn-limpar-busca');
   
   // Elementos do Modal
   const modal = document.getElementById('modal-cidade');
@@ -339,6 +363,7 @@ const fotosCidade = [
     // Sincroniza campo de busca
     if (input && input.value !== cidade.nome) {
       input.value = cidade.nome;
+      if (btnLimpar) btnLimpar.classList.remove('hidden');
     }
 
     // Abre o Pop-up com transição suave
@@ -377,59 +402,181 @@ const fotosCidade = [
     }
   });
 
-  // Busca inteligente (match exato em input, match parcial em Enter/Change)
-  function processarBusca(termo, abrirModal = true) {
-    const t = termo.trim().toLowerCase();
-    if (!t) return;
-    // 1. Busca exata por nome ou slug
-    let achado = municipios.find(m => m.nome.toLowerCase() === t || m.slug === t);
-    // 2. Se não achou exato, busca por prefixo ou substring
-    if (!achado) {
-      achado = municipios.find(m => m.nome.toLowerCase().startsWith(t));
-    }
-    if (!achado) {
-      achado = municipios.find(m => m.nome.toLowerCase().includes(t));
+  // ========================================================
+  // DROPDOWN INTELIGENTE & AUTOCOMPLETE CUSTOMIZADO
+  // ========================================================
+  let itemAtivoIndex = -1;
+  let itensFiltrados = [...municipios];
+
+  function normalizar(str) {
+    return (str || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+  }
+
+  function renderizarDropdown(lista) {
+    if (!dropdownLista) return;
+    dropdownLista.innerHTML = '';
+    itensFiltrados = lista;
+    itemAtivoIndex = -1;
+
+    if (lista.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'px-4 py-3 text-xs sm:text-sm text-slate-500 text-center italic select-none';
+      li.textContent = 'Nenhum município encontrado com esse nome.';
+      dropdownLista.appendChild(li);
+      return;
     }
 
-    if (achado) {
-      if (input) {
-        input.value = achado.nome;
-        input.blur();
-      }
-      if (abrirModal) abrirPopUp(achado.slug);
-      window.dispatchEvent(new CustomEvent('selecionar-cidade-no-mapa', { detail: { slug: achado.slug, abrirPopUp: false } }));
+    lista.forEach((m, idx) => {
+      const li = document.createElement('li');
+      li.className = 'item-municipio-dropdown px-3.5 py-2.5 hover:bg-orange-50/90 cursor-pointer flex items-center justify-between transition-colors group select-none border-b border-slate-50 last:border-b-0';
+      li.setAttribute('data-slug', m.slug);
+      li.setAttribute('data-nome', m.nome);
+      li.setAttribute('data-index', String(idx));
+
+      const destaqueHtml = m.destaques && m.destaques[0]
+        ? `<span class="text-[11px] font-bold text-slate-500 group-hover:text-[#F15A29] bg-slate-100 group-hover:bg-orange-100/80 px-2 py-0.5 rounded-full transition-colors shrink-0 ml-2">${m.destaques[0]}</span>`
+        : `<span class="text-[11px] font-medium text-slate-400 group-hover:text-slate-600 shrink-0 ml-2">${m.regiao || 'Rio de Janeiro'}</span>`;
+
+      li.innerHTML = `
+        <div class="flex items-center gap-2 truncate">
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-[#F15A29] transition-colors shrink-0"></span>
+          <span class="font-sans font-semibold text-slate-800 group-hover:text-[#F15A29] text-xs sm:text-sm truncate">${m.nome}</span>
+        </div>
+        ${destaqueHtml}
+      `;
+
+      li.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        selecionarMunicipio(m);
+      });
+
+      dropdownLista.appendChild(li);
+    });
+  }
+
+  function abrirDropdown() {
+    if (!dropdown) return;
+    filtrarDropdown(input ? input.value : '');
+    dropdown.classList.remove('hidden');
+  }
+
+  function fecharDropdown() {
+    if (!dropdown) return;
+    dropdown.classList.add('hidden');
+    itemAtivoIndex = -1;
+  }
+
+  function selecionarMunicipio(m) {
+    if (!m) return;
+    if (input) input.value = m.nome;
+    if (btnLimpar) btnLimpar.classList.remove('hidden');
+    fecharDropdown();
+    abrirPopUp(m.slug);
+    window.dispatchEvent(new CustomEvent('selecionar-cidade-no-mapa', { detail: { slug: m.slug, abrirPopUp: false } }));
+  }
+
+  function filtrarDropdown(termo) {
+    const t = normalizar(termo);
+    if (!t) {
+      renderizarDropdown(municipios);
+    } else {
+      const filtrados = municipios.filter(m => {
+        const nomeNorm = normalizar(m.nome);
+        const slugNorm = normalizar(m.slug);
+        const regiaoNorm = normalizar(m.regiao || '');
+        return nomeNorm.includes(t) || slugNorm.includes(t) || regiaoNorm.includes(t);
+      });
+      renderizarDropdown(filtrados);
+    }
+  }
+
+  function atualizarItemAtivo(novoIndex) {
+    const itens = dropdownLista?.querySelectorAll('.item-municipio-dropdown');
+    if (!itens || itens.length === 0) return;
+
+    if (itemAtivoIndex >= 0 && itemAtivoIndex < itens.length) {
+      itens[itemAtivoIndex].classList.remove('bg-orange-50', 'text-[#F15A29]');
+    }
+
+    itemAtivoIndex = Math.max(0, Math.min(novoIndex, itens.length - 1));
+    const ativo = itens[itemAtivoIndex];
+    if (ativo) {
+      ativo.classList.add('bg-orange-50', 'text-[#F15A29]');
+      ativo.scrollIntoView({ block: 'nearest' });
     }
   }
 
   if (input) {
-    // Quando o usuário seleciona uma sugestão da datalist ou digita o nome completo
-    input.addEventListener('input', (e) => {
-      const valor = e.target.value.trim().toLowerCase();
-      // Apenas dispara automaticamente se for match exato com o nome do município (ex: clicou na sugestão da datalist)
-      const achadoExato = municipios.find(m => m.nome.toLowerCase() === valor);
-      if (achadoExato) {
-        if (input) input.blur();
-        processarBusca(valor, true);
-      }
+    // Abre a lista no primeiro clique ou foco
+    input.addEventListener('focus', () => {
+      abrirDropdown();
     });
 
-    input.addEventListener('change', (e) => {
-      const valor = e.target.value.trim().toLowerCase();
-      const achadoExato = municipios.find(m => m.nome.toLowerCase() === valor);
-      if (achadoExato) {
-        if (input) input.blur();
-        processarBusca(e.target.value, true);
+    input.addEventListener('click', (e) => {
+      e.stopPropagation();
+      abrirDropdown();
+    });
+
+    input.addEventListener('input', (e) => {
+      const valor = e.target.value;
+      if (btnLimpar) {
+        if (valor.length > 0) btnLimpar.classList.remove('hidden');
+        else btnLimpar.classList.add('hidden');
       }
+      abrirDropdown();
     });
 
     input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
+      const isOpen = dropdown && !dropdown.classList.contains('hidden');
+
+      if (e.key === 'ArrowDown') {
         e.preventDefault();
-        if (input) input.blur();
-        processarBusca(input.value, true);
+        if (!isOpen) {
+          abrirDropdown();
+        } else {
+          atualizarItemAtivo(itemAtivoIndex + 1);
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (isOpen) {
+          atualizarItemAtivo(itemAtivoIndex - 1);
+        }
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (isOpen && itemAtivoIndex >= 0 && itensFiltrados[itemAtivoIndex]) {
+          selecionarMunicipio(itensFiltrados[itemAtivoIndex]);
+        } else if (itensFiltrados.length > 0) {
+          selecionarMunicipio(itensFiltrados[0]);
+        } else {
+          fecharDropdown();
+        }
+      } else if (e.key === 'Escape') {
+        fecharDropdown();
       }
     });
   }
+
+  // Botão limpar busca (X)
+  btnLimpar?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (input) {
+      input.value = '';
+      input.focus();
+    }
+    btnLimpar.classList.add('hidden');
+    abrirDropdown();
+  });
+
+  // Fechar dropdown ao clicar fora
+  document.addEventListener('click', (e) => {
+    if (containerBusca && !containerBusca.contains(e.target)) {
+      fecharDropdown();
+    }
+  });
 
   // Atalhos rápidos para os polos com mais investimentos
   document.querySelectorAll('.btn-atalho-cidade').forEach((btn) => {
