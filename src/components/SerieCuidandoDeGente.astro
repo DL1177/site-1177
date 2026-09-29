@@ -1,13 +1,12 @@
 ---
 // src/components/SerieCuidandoDeGente.astro
-// Seção da Série Especial Documental no YouTube "CUIDANDO DE GENTE"
+// Hub Interativo de Vídeo (Estilo Playlist / Streaming) — Série Especial "CUIDANDO DE GENTE"
 import { EPISODIOS_SERIE } from '../data/cuidando-de-gente';
 
-const episodioDestaque = EPISODIOS_SERIE[0]; // Dona Rosangela Maria
-const outrosEpisodios = EPISODIOS_SERIE.slice(1);
+const episodioInicial = EPISODIOS_SERIE[0]; // Episódio âncora inicial
 ---
 
-<section id="cuidando-de-gente" class="py-12 sm:py-16 md:py-20 bg-white relative border-b border-slate-200/80 overflow-hidden">
+<section id="cuidando-de-gente" class="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-white via-slate-50 to-white relative border-b border-slate-200/80 overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
     <!-- Cabeçalho Editorial da Série -->
@@ -29,75 +28,127 @@ const outrosEpisodios = EPISODIOS_SERIE.slice(1);
     </div>
 
     <!-- ======================================================== -->
-    <!-- EPISÓDIO ÂNCORA EM DESTAQUE (HERO EPISODE) -->
+    <!-- THEATER CENTRAL / PLAYER INTERATIVO DE STREAMING         -->
     <!-- ======================================================== -->
-    <div class="max-w-5xl mx-auto bg-gradient-to-br from-slate-900 via-[#0B2554] to-[#123F8F] rounded-3xl p-6 sm:p-10 text-white shadow-2xl shadow-blue-950/30 mb-8 sm:mb-10 border border-blue-800/40 relative overflow-hidden group">
-      
-      <!-- Detalhe decorativo de fundo -->
-      <div class="absolute -right-16 -bottom-16 w-80 h-80 rounded-full bg-[#F15A29]/15 blur-3xl pointer-events-none"></div>
+    <div
+      id="serie-theater"
+      class="max-w-5xl mx-auto bg-gradient-to-br from-[#071738] via-[#0B2554] to-[#112A61] rounded-3xl p-5 sm:p-8 md:p-10 text-white shadow-2xl shadow-blue-950/40 mb-8 sm:mb-10 border border-blue-800/50 relative overflow-hidden"
+    >
+      <!-- Glow decorativo de fundo -->
+      <div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-[#F15A29]/15 blur-3xl pointer-events-none"></div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center relative z-10">
         
-        <!-- Player Visual / Thumbnail que abre diretamente o YouTube -->
+        <!-- Tela do Player (Suporta Thumbnail com Play ou Iframe Direto) -->
         <div class="lg:col-span-7">
-          <a
-            href={episodioDestaque.youtubeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="relative aspect-video rounded-2xl block overflow-hidden shadow-2xl bg-black group/thumb border border-white/20"
-            title={`Assistir história de ${episodioDestaque.personagem} no YouTube`}
+          <div
+            id="player-screen-container"
+            class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black border border-white/20 group/screen"
           >
-            <img
-              src={`https://img.youtube.com/vi/${episodioDestaque.youtubeId}/hqdefault.jpg`}
-              alt={episodioDestaque.titulo}
-              class="w-full h-full object-cover group-hover/thumb:scale-105 transition-transform duration-500"
-              loading="lazy"
-            />
-            <!-- Overlay escuro -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20 group-hover/thumb:from-black/60 transition-colors"></div>
+            <!-- Poster com imagem e botão de play -->
+            <div id="player-poster" class="absolute inset-0 cursor-pointer">
+              <img
+                id="player-poster-img"
+                src={`https://img.youtube.com/vi/${episodioInicial.youtubeId}/hqdefault.jpg`}
+                alt={episodioInicial.titulo}
+                class="w-full h-full object-cover group-hover/screen:scale-105 transition-transform duration-500"
+                loading="eager"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20 group-hover/screen:from-black/60 transition-colors"></div>
 
-            <!-- Botão Play Pulsante Central -->
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#F15A29] group-hover/thumb:bg-[#ff6f3d] text-white flex items-center justify-center shadow-xl shadow-orange-950/60 transform group-hover/thumb:scale-110 active:scale-95 transition-all">
-                <svg class="w-7 h-7 sm:w-9 sm:h-9 fill-current ml-1" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
+              <!-- Botão Play Pulsante Central -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <button
+                  type="button"
+                  id="btn-play-trigger"
+                  aria-label="Reproduzir vídeo agora"
+                  class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#F15A29] group-hover/screen:bg-[#ff6f3d] text-white flex items-center justify-center shadow-2xl shadow-orange-950/70 transform group-hover/screen:scale-110 active:scale-95 transition-all cursor-pointer"
+                >
+                  <svg class="w-7 h-7 sm:w-9 sm:h-9 fill-current ml-1" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </button>
               </div>
             </div>
 
-          </a>
+            <!-- Iframe Container (oculto até o usuário dar play) -->
+            <div id="player-iframe-wrapper" class="hidden absolute inset-0 w-full h-full bg-black">
+              <iframe
+                id="player-iframe"
+                src=""
+                class="w-full h-full"
+                title="Player da Série Cuidando de Gente"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
         </div>
 
-        <!-- Conteúdo Textual do Episódio Âncora -->
+        <!-- Informações e Ações do Episódio Ativo -->
         <div class="lg:col-span-5 flex flex-col justify-between">
           <div>
+            <!-- Badge do Equipamento -->
             <div class="flex items-center gap-2 mb-3">
-              <span class="px-3 py-0.5 rounded-full bg-orange-500/20 border border-orange-400/40 text-orange-300 text-xs font-bold uppercase tracking-wider">
-                {episodioDestaque.badge}
+              <span
+                id="player-badge"
+                class="px-3.5 py-1 rounded-full bg-orange-500/20 border border-orange-400/40 text-orange-300 text-xs font-bold uppercase tracking-wider"
+              >
+                {episodioInicial.badge}
               </span>
             </div>
 
-            <a
-              href={episodioDestaque.youtubeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="block group-hover:text-orange-300 transition-colors"
+            <!-- Nome do Personagem -->
+            <h3
+              id="player-personagem"
+              class="font-display text-2xl sm:text-3xl lg:text-4xl font-black italic text-white leading-tight mb-3"
             >
-              <h3 class="font-display text-2xl sm:text-3xl font-black italic text-white leading-tight mb-3">
-                {episodioDestaque.personagem}
-              </h3>
-            </a>
+              {episodioInicial.personagem}
+            </h3>
 
-            <blockquote class="font-sans text-sm sm:text-base text-blue-100 font-semibold italic border-l-2 border-[#F15A29] pl-3 mb-4 leading-relaxed">
-              "{episodioDestaque.fraseImpacto}"
+            <!-- Frase de Impacto -->
+            <blockquote
+              id="player-frase"
+              class="font-sans text-sm sm:text-base text-blue-100 font-semibold italic border-l-2 border-[#F15A29] pl-3 mb-4 leading-relaxed"
+            >
+              "{episodioInicial.fraseImpacto}"
             </blockquote>
 
-            <p class="font-sans text-sm sm:text-base text-white/95 leading-relaxed mb-6 font-medium">
-              {episodioDestaque.sinopse}
+            <!-- Sinopse -->
+            <p
+              id="player-sinopse"
+              class="font-sans text-sm sm:text-[15px] text-white/90 leading-relaxed mb-6 font-normal"
+            >
+              {episodioInicial.sinopse}
             </p>
           </div>
 
+          <!-- Botões de Ação -->
+          <div class="flex items-center gap-3 flex-wrap">
+            <a
+              id="player-yt-link"
+              href={episodioInicial.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-sans text-xs sm:text-sm font-bold shadow-lg shadow-red-950/40 hover:scale-105 active:scale-95 transition-all"
+            >
+              <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              <span>Assistir no YouTube</span>
+            </a>
 
+            <button
+              id="btn-play-theater"
+              type="button"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-sans text-xs sm:text-sm font-semibold border border-white/20 hover:border-[#F15A29] transition-all cursor-pointer"
+            >
+              <svg class="w-4 h-4 fill-[#F15A29]" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <span>Tocar Aqui</span>
+            </button>
+          </div>
 
         </div>
 
@@ -105,82 +156,248 @@ const outrosEpisodios = EPISODIOS_SERIE.slice(1);
     </div>
 
     <!-- ======================================================== -->
-    <!-- GRADE DOS DEMAIS EPISÓDIOS DA SÉRIE -->
+    <!-- PLAYLIST / RÉGUA HORIZONTAL DESLIZANTE DE EPISÓDIOS      -->
     <!-- ======================================================== -->
     <div class="max-w-6xl mx-auto">
-      <div class="flex items-center justify-between gap-4 mb-6">
+      
+      <!-- Cabeçalho da Playlist com Controles Desktop -->
+      <div class="flex items-center justify-between gap-4 mb-3 sm:mb-4">
         <div>
-          <h3 class="font-display text-xl sm:text-2xl font-black italic text-[#123F8F]">
-            TODAS AS HISTÓRIAS
+          <h3 class="font-display text-lg sm:text-xl font-black italic text-[#123F8F]">
+            SELECIONE UMA HISTÓRIA
           </h3>
+          <p class="font-sans text-xs text-slate-500 font-medium">
+            Toque em qualquer episódio para carregar no player acima
+          </p>
         </div>
-        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold">
-          {EPISODIOS_SERIE.length} Histórias Reais
-        </span>
+
+        <!-- Controles de Navegação Desktop -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-500 hidden sm:inline mr-2">
+            {EPISODIOS_SERIE.length} Episódios
+          </span>
+          <button
+            id="playlist-prev"
+            type="button"
+            aria-label="Voltar histórias"
+            class="p-2 rounded-full border border-slate-200 bg-white text-slate-700 hover:bg-[#123F8F] hover:text-white transition-all cursor-pointer shadow-xs"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            id="playlist-next"
+            type="button"
+            aria-label="Avançar histórias"
+            class="p-2 rounded-full border border-slate-200 bg-white text-slate-700 hover:bg-[#123F8F] hover:text-white transition-all cursor-pointer shadow-xs"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {outrosEpisodios.map((ep) => (
-          <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-[#F15A29]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden group">
-            
-            <!-- Thumbnail 16:9 que abre direto o YouTube -->
-            <a
-              href={ep.youtubeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="relative aspect-video bg-slate-900 block overflow-hidden"
-              title={`Assistir história de ${ep.personagem} no YouTube`}
+      <!-- Trilho Horizontal Deslizante com Miniaturas Compactas -->
+      <div
+        id="playlist-track"
+        class="flex gap-4 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth hide-scrollbar -mx-4 sm:mx-0 px-4 sm:px-0"
+        style="scrollbar-width: none; -ms-overflow-style: none;"
+      >
+        {EPISODIOS_SERIE.map((ep, index) => {
+          const isPrimeiro = index === 0;
+          return (
+            <button
+              type="button"
+              class={`playlist-item snap-start shrink-0 w-60 sm:w-64 text-left rounded-2xl border-2 transition-all p-2.5 bg-white cursor-pointer select-none group/item ${
+                isPrimeiro
+                  ? 'border-[#F15A29] ring-2 ring-[#F15A29]/20 shadow-md'
+                  : 'border-slate-200/90 hover:border-slate-300 shadow-xs'
+              }`}
+              data-id={ep.id}
+              data-youtube-id={ep.youtubeId}
+              data-youtube-url={ep.youtubeUrl}
+              data-personagem={ep.personagem}
+              data-titulo={ep.titulo}
+              data-frase={ep.fraseImpacto}
+              data-sinopse={ep.sinopse}
+              data-badge={ep.badge}
+              data-index={index}
             >
-              <img
-                src={`https://img.youtube.com/vi/${ep.youtubeId}/hqdefault.jpg`}
-                alt={ep.titulo}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
+              <!-- Thumbnail 16:9 -->
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-900 mb-2">
+                <img
+                  src={`https://img.youtube.com/vi/${ep.youtubeId}/hqdefault.jpg`}
+                  alt={ep.titulo}
+                  class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-black/25 group-hover/item:bg-black/10 transition-colors"></div>
 
-              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+                <!-- Selo de status do card -->
+                <div class="absolute top-1.5 left-1.5">
+                  <span class={`playlist-status-tag px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                    isPrimeiro ? 'bg-[#F15A29] text-white shadow-sm' : 'bg-black/70 text-white/90 backdrop-blur-xs'
+                  }`}>
+                    {isPrimeiro ? 'Em exibição' : `Vídeo #${index + 1}`}
+                  </span>
+                </div>
 
-              <!-- Play Button Central -->
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-[#F15A29] text-white flex items-center justify-center shadow-lg shadow-black/40 transform group-hover:scale-110 active:scale-95 transition-all">
-                  <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24">
+                <!-- Ícone Play Mini -->
+                <div class="absolute bottom-1.5 right-1.5 w-6 h-6 rounded-full bg-[#F15A29] text-white flex items-center justify-center shadow-md">
+                  <svg class="w-3 h-3 fill-current ml-0.5" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
               </div>
 
-            </a>
-
-            <!-- Corpo do Card -->
-            <div class="p-5 flex flex-col justify-between flex-grow">
+              <!-- Dados Compactos do Card -->
               <div>
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="text-xs font-bold text-orange-600 uppercase tracking-wider bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200/60">
-                    {ep.badge}
-                  </span>
-                </div>
-
-                <a
-                  href={ep.youtubeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="block group-hover:text-[#F15A29] transition-colors"
-                >
-                  <h4 class="font-display text-lg sm:text-xl font-black italic text-[#123F8F] leading-tight mb-2 group-hover:text-[#F15A29] transition-colors">
-                    {ep.personagem}
-                  </h4>
-                </a>
-
-                <p class="font-sans text-[13px] sm:text-sm text-slate-700 leading-relaxed font-medium">
-                  {ep.sinopse}
-                </p>
+                <span class="inline-block text-[11px] font-bold text-[#F15A29] uppercase tracking-wide truncate max-w-full">
+                  {ep.badge}
+                </span>
+                <h4 class="font-display text-sm font-black italic text-[#123F8F] leading-tight truncate group-hover/item:text-[#F15A29] transition-colors mt-0.5">
+                  {ep.personagem}
+                </h4>
               </div>
-            </div>
-
-          </div>
-        ))}
+            </button>
+          );
+        })}
       </div>
+
     </div>
 
   </div>
 </section>
+
+<!-- ======================================================== -->
+<!-- SCRIPT INTERATIVO DO HUB DE STREAMING                    -->
+<!-- ======================================================== -->
+<script>
+  function setupSerieHub() {
+    const poster = document.getElementById('player-poster');
+    const posterImg = document.getElementById('player-poster-img') as HTMLImageElement;
+    const iframeWrapper = document.getElementById('player-iframe-wrapper');
+    const iframe = document.getElementById('player-iframe') as HTMLIFrameElement;
+    const btnPlayTrigger = document.getElementById('btn-play-trigger');
+    const btnPlayTheater = document.getElementById('btn-play-theater');
+
+    const badgeEl = document.getElementById('player-badge');
+    const personagemEl = document.getElementById('player-personagem');
+    const fraseEl = document.getElementById('player-frase');
+    const sinopseEl = document.getElementById('player-sinopse');
+    const ytLinkEl = document.getElementById('player-yt-link') as HTMLAnchorElement;
+
+    const playlistTrack = document.getElementById('playlist-track');
+    const playlistItems = document.querySelectorAll<HTMLButtonElement>('.playlist-item');
+    const btnPrev = document.getElementById('playlist-prev');
+    const btnNext = document.getElementById('playlist-next');
+
+    let isPlaying = false;
+    let currentYtId = playlistItems[0]?.getAttribute('data-youtube-id') || '';
+
+    // Função para iniciar reprodução no iframe embutido
+    function startVideo(ytId: string) {
+      if (!iframe || !iframeWrapper || !poster) return;
+      currentYtId = ytId;
+      iframe.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0`;
+      poster.classList.add('hidden');
+      iframeWrapper.classList.remove('hidden');
+      isPlaying = true;
+      if (btnPlayTheater) {
+        btnPlayTheater.innerHTML = `
+          <svg class="w-4 h-4 fill-emerald-400" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <span class="text-emerald-300 font-semibold">Reproduzindo</span>
+        `;
+      }
+    }
+
+    // Função para selecionar episódio da playlist
+    function selectEpisode(item: HTMLButtonElement, autoPlay = false) {
+      const ytId = item.getAttribute('data-youtube-id') || '';
+      const ytUrl = item.getAttribute('data-youtube-url') || '';
+      const personagem = item.getAttribute('data-personagem') || '';
+      const frase = item.getAttribute('data-frase') || '';
+      const sinopse = item.getAttribute('data-sinopse') || '';
+      const badge = item.getAttribute('data-badge') || '';
+      const index = item.getAttribute('data-index') || '0';
+
+      // Atualiza textos e links
+      if (badgeEl) badgeEl.textContent = badge;
+      if (personagemEl) personagemEl.textContent = personagem;
+      if (fraseEl) fraseEl.textContent = `"${frase}"`;
+      if (sinopseEl) sinopseEl.textContent = sinopse;
+      if (ytLinkEl) ytLinkEl.href = ytUrl;
+
+      // Atualiza o poster da miniatura
+      if (posterImg) {
+        posterImg.src = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+      }
+
+      // Se já estava tocando ou foi solicitado autoPlay, troca o vídeo do iframe
+      if (isPlaying || autoPlay) {
+        startVideo(ytId);
+      }
+
+      // Atualiza estilização da playlist
+      playlistItems.forEach((btn) => {
+        const isCurrent = btn === item;
+        const tag = btn.querySelector('.playlist-status-tag');
+        const bIndex = btn.getAttribute('data-index') || '';
+
+        if (isCurrent) {
+          btn.className = 'playlist-item snap-start shrink-0 w-60 sm:w-64 text-left rounded-2xl border-2 transition-all p-2.5 bg-white cursor-pointer select-none group/item border-[#F15A29] ring-2 ring-[#F15A29]/20 shadow-md';
+          if (tag) {
+            tag.className = 'playlist-status-tag px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#F15A29] text-white shadow-sm';
+            tag.textContent = 'Em exibição';
+          }
+        } else {
+          btn.className = 'playlist-item snap-start shrink-0 w-60 sm:w-64 text-left rounded-2xl border-2 transition-all p-2.5 bg-white cursor-pointer select-none group/item border-slate-200/90 hover:border-slate-300 shadow-xs';
+          if (tag) {
+            tag.className = 'playlist-status-tag px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/70 text-white/90 backdrop-blur-xs';
+            tag.textContent = `Vídeo #${Number(bIndex) + 1}`;
+          }
+        }
+      });
+
+      // Rola a playlist sutilmente para manter o item selecionado visível
+      item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    // Clique no poster ou no botão Play central
+    poster?.addEventListener('click', () => {
+      startVideo(currentYtId);
+    });
+
+    btnPlayTrigger?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      startVideo(currentYtId);
+    });
+
+    btnPlayTheater?.addEventListener('click', () => {
+      startVideo(currentYtId);
+    });
+
+    // Cliques nos itens da playlist
+    playlistItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        selectEpisode(item, false);
+      });
+    });
+
+    // Controles de navegação da playlist
+    if (playlistTrack && btnPrev && btnNext) {
+      btnPrev.addEventListener('click', () => {
+        playlistTrack.scrollBy({ left: -280, behavior: 'smooth' });
+      });
+
+      btnNext.addEventListener('click', () => {
+        playlistTrack.scrollBy({ left: 280, behavior: 'smooth' });
+      });
+    }
+  }
+
+  setupSerieHub();
+  document.addEventListener('astro:page-load', setupSerieHub);
+</script>
