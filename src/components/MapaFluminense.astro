@@ -117,29 +117,29 @@ const TONS_AZUL = [
         })}
       </g>
 
-      <!-- Marcadores luminosos dos polos de atuação (pontinhos laranjas vibrantes de alto contraste) -->
+      <!-- Marcadores luminosos em TODOS os 92 municípios (pontinhos amarelos solares comprovando entregas e recursos em 100% do Estado) -->
       <g id="camada-pontos-polos" class="pointer-events-none">
-        {MUNICIPIOS_MAPA.filter(m => POLOS_DESTAQUE.has(m.slug)).map((m) => (
-          <g class="ponto-polo-beacon">
-            <!-- Aura externa pulsante suave -->
+        {MUNICIPIOS_MAPA.map((m) => (
+          <g class="ponto-polo-beacon" data-dot-slug={m.slug}>
+            <!-- Aura externa amarela suave -->
             <circle
               cx={m.centroid[0]}
               cy={m.centroid[1]}
-              r="7"
-              class="fill-[#F15A29]/30 animate-pulse"
+              r="4.8"
+              class="fill-[#FACC15]/25"
             />
-            <!-- Ponto sólido de alto contraste laranja brilhante -->
+            <!-- Ponto sólido amarelo ouro de alto contraste -->
             <circle
               cx={m.centroid[0]}
               cy={m.centroid[1]}
-              r="3.5"
-              class="fill-[#F15A29] stroke-white stroke-[1.2]"
+              r="2.8"
+              class="fill-[#FACC15] stroke-[#071738] stroke-[0.8]"
             />
             <!-- Brilho no núcleo -->
             <circle
               cx={m.centroid[0]}
               cy={m.centroid[1]}
-              r="1.2"
+              r="1"
               class="fill-white"
             />
           </g>

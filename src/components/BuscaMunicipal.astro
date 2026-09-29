@@ -86,15 +86,16 @@ const fotosCidade = [
   </div>
 
   <!-- Conteúdo Central: Título Sobreposto + Barra de Busca + Atalhos + Mapa -->
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-10 md:-mt-12 relative z-20">
+  <div class="w-full max-w-[1440px] mx-auto px-2 sm:px-4 md:px-6 lg:px-8 -mt-8 sm:-mt-10 md:-mt-12 relative z-20">
     
     <!-- Cabeçalho Editorial Sobreposto -->
-    <div class="max-w-3xl mx-auto text-center mb-6">
-      <h2 class="font-display text-3xl sm:text-5xl md:text-6xl font-black italic tracking-tight text-white leading-tight mb-2.5 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
-        O QUE ELE FEZ PELA <span class="text-[#F15A29]">SUA CIDADE?</span>
+    <div class="max-w-4xl mx-auto text-center mb-6">
+      <h2 class="font-display text-3xl sm:text-5xl md:text-6xl font-black italic tracking-tight leading-tight mb-2.5 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
+        <span class="text-white">VEJA O QUE ELE FEZ</span> <br class="hidden sm:inline" />
+        <span class="text-[#F15A29]">PELAS NOSSAS CIDADES</span>
       </h2>
-      <p class="font-sans text-sm sm:text-base text-blue-100 font-medium mb-5 max-w-xl mx-auto leading-relaxed">
-        Clique no mapa ou busque sua cidade para ver as entregas e recursos investidos.
+      <p class="font-sans text-sm sm:text-base text-blue-100 font-medium mb-5 max-w-2xl mx-auto leading-relaxed">
+        Digite ou selecione o nome da sua cidade para conhecer as entregas e os recursos investidos pelo Doutor Luizinho.
       </p>
 
       <!-- Barra de Busca Centralizada com Dropdown Inteligente Customizado -->
@@ -157,8 +158,8 @@ const fotosCidade = [
       </div>
     </div>
 
-    <!-- O Mapa Vetorial Fluminense Integrado e Limpo (Sem Moldura Escura) -->
-    <div class="max-w-4xl mx-auto relative flex items-center justify-center">
+    <!-- O Mapa Vetorial Fluminense Expandido até os Limites das Bordas Laterais -->
+    <div class="w-full relative flex items-center justify-center mt-2 sm:mt-4">
       <MapaFluminense />
     </div>
 
