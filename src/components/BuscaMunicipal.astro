@@ -236,8 +236,8 @@ const fotosCidade = [
 
     <!-- Lista de Entregas e Equipamentos -->
     <div class="mb-6">
-      <h4 class="font-sans text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-600 mb-3">
-        Entregas e Ações no Município:
+      <h4 id="modal-cidade-entregas-titulo" class="font-sans text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-600 mb-3">
+        Entregas que Atendem a Cidade:
       </h4>
       <ul id="modal-cidade-entregas" class="space-y-2.5">
         <li class="flex items-start gap-2.5 text-sm sm:text-base text-slate-900 font-medium">
@@ -285,6 +285,7 @@ const fotosCidade = [
   const pagasEl = document.getElementById('modal-cidade-pagas');
   const garantidasEl = document.getElementById('modal-cidade-garantidas');
   const boxGarantidas = document.getElementById('modal-box-garantidas');
+  const entregasTituloEl = document.getElementById('modal-cidade-entregas-titulo');
   const entregasEl = document.getElementById('modal-cidade-entregas');
   const shareWa = document.getElementById('modal-cidade-whatsapp');
   const box1Label = document.getElementById('modal-box-1-label');
@@ -300,6 +301,7 @@ const fotosCidade = [
     // Popula dados no Pop-up
     if (nomeEl) nomeEl.textContent = cidade.nome;
     if (resumoEl) resumoEl.textContent = cidade.resumoLocal;
+    if (entregasTituloEl) entregasTituloEl.textContent = `Entregas que Atendem ${cidade.nome}:`;
 
     if (cidade.emendasPagas) {
       if (box1Label) box1Label.textContent = `Recursos Destinados a ${cidade.nome}`;
