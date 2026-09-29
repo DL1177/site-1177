@@ -72,13 +72,13 @@ export const MUNICIPIOS: Municipio[] = [
     samu100: true,
     emendasPagas: 'R$ 35.000.000,00',
     entregasDiretas: [
-      'Instituto Estadual do Cérebro Paulo Niemeyer: Novo prédio de 6 andares, 103 leitos e Gamma Knife 100% SUS',
+      'Duplicação do Instituto do Cérebro: Novo prédio anexo de 6 andares, 103 leitos, capacidade cirúrgica dobrada e Gamma Knife 100% SUS',
       'Instituto Estadual de Olhos (Senador Vasconcelos): Mais de 113 mil atendimentos e cirurgias de visão na Zona Oeste',
       'Cedtea Gávea: Primeiro centro público estadual de diagnóstico precoce do Autismo com mais de 13 mil consultas',
       'Hospital Estadual Getúlio Vargas (Penha): Nova UTI Pediátrica e Tomógrafo computadorizado de emergência',
       'AME Cantagalo (Susana Naspolini): Mais de 40 mil atendimentos ambulatoriais na Zona Sul',
     ],
-    destaques: ['Instituto do Cérebro', 'Instituto de Olhos', 'Cedtea Gávea', 'Hosp. Getúlio Vargas'],
+    destaques: ['Duplicação do Cérebro', 'Instituto de Olhos', 'Cedtea Gávea', 'Hosp. Getúlio Vargas'],
     resumoLocal: 'Investimentos massivos na Capital, desde a ponta neurocirúrgica mundial no Centro até o primeiro polo de catarata e glaucoma em Senador Vasconcelos, na Zona Oeste, e assistência pediátrica na Penha.',
   },
   {
@@ -233,7 +233,7 @@ export const MUNICIPIOS: Municipio[] = [
     entregasDiretas: [
       'Hospital Estadual Azevedo Lima: Reestruturação completa da Emergência e Maternidade de alto padrão',
       'Rede SUS Municipal: Mais de R$ 6,2 milhões destinados e pagos para entidades e custeio da saúde em Niterói',
-      'Instituto Estadual do Cérebro: Referência neurocirúrgica e radiocirurgia Gamma Knife 100% SUS',
+      'Duplicação do Instituto do Cérebro: Retaguarda neurocirúrgica com capacidade dobrada e radiocirurgia Gamma Knife 100% SUS',
       'SAMU 100% RJ: Renovação de UTIs móveis e integração direta à regulação do CIS',
     ],
     destaques: ['Hosp. Azevedo Lima', 'R$ 6,2M Pagos', 'SAMU 100%'],
@@ -324,7 +324,7 @@ export const MUNICIPIOS: Municipio[] = [
       'SAMU 100% na Região dos Lagos: Frota de ambulâncias novas reforçada em Araruama com custeio mensal garantido',
       'Resgate Aeromédico da Saúde: Helicóptero dedicado para transferências ágeis de urgência e traumas rodoviários',
       'Regulação Central pelo CIS: Monitoramento em tempo real com redução de 38,4% na fila de espera por leitos',
-      'Instituto Estadual do Cérebro: Retaguarda para neurocirurgia de ponta e radiocirurgia Gamma Knife 100% SUS',
+      'Duplicação do Instituto do Cérebro: Retaguarda para neurocirurgia de ponta e radiocirurgia Gamma Knife 100% SUS',
     ],
     destaques: ['Centro de Trauma HERC', 'Leitos de CTI', 'SAMU 100% Lagos', 'Resgate Aeromédico'],
     resumoLocal: 'Araruama sedia o Hospital Estadual Roberto Chabo (HERC), fortalecido por Dr. Luizinho com o novo Centro de Trauma e leitos de CTI de referência para 9 municípios, além de ambulâncias novas do SAMU 100% e resgate aeromédico.',
@@ -437,7 +437,7 @@ export const MUNICIPIOS: Municipio[] = [
       'Apoio à Rede Hospitalar Serrana: Parcerias para manutenção e custeio de leitos na Região Serrana',
       'Resgate Aeromédico da Saúde: Suporte de helicóptero para transferências de emergência em áreas de serra',
       'Regulação Inteligente no CIS: Redução de 38,4% no tempo de espera por leitos de emergência e UTI',
-      'Instituto Estadual do Cérebro: Referência para casos neurológicos complexos e radiocirurgia 100% SUS',
+      'Duplicação do Instituto do Cérebro: Referência para casos neurológicos complexos e radiocirurgia 100% SUS',
     ],
     destaques: ['SAMU 100% Serra', 'Apoio Hospitalar', 'Regulação CIS'],
     resumoLocal: 'Dr. Luizinho garantiu ambulâncias novas do SAMU 100% preparadas para o relevo de Cantagalo e seus distritos, suporte aos hospitais serranos e leitos monitorados em tempo real pelo CIS.',
@@ -496,16 +496,16 @@ const CONFIG_REGIOES: Record<string, {
 
   'Metropolitana': {
     entregas: (nome: string) => [
-      'Instituto Estadual do Cérebro Paulo Niemeyer: Novo anexo de 6 andares no Centro, 103 leitos e Gamma Knife 100% SUS',
+      'Duplicação do Instituto do Cérebro: Novo anexo de 6 andares no Centro, 103 leitos e Gamma Knife 100% SUS',
       'Instituto Estadual de Olhos: Polo oftalmológico de excelência em Senador Vasconcelos com mais de 113 mil atendimentos e cirurgias de visão',
       'Hospital Estadual Getúlio Vargas: Nova UTI Pediátrica e Tomógrafo computadorizado na emergência da Penha',
       'Hospital Estadual Azevedo Lima: Modernização da emergência e maternidade de alto risco em Niterói',
       'Cedtea Gávea: Primeiro Centro Público Estadual de Diagnóstico Precoce do Autismo (TEA)',
       `SAMU 100% RJ: Renovação da frota de ambulâncias e custeio estadual de socorro móvel garantido para ${nome}`,
     ],
-    destaques: ['Instituto do Cérebro', 'Instituto de Olhos', 'Cedtea Gávea', 'SAMU 100%'],
+    destaques: ['Duplicação do IEC', 'Instituto de Olhos', 'Cedtea Gávea', 'SAMU 100%'],
     resumo: (nome: string) =>
-      `Investimentos estruturantes na Região Metropolitana, assegurando ambulâncias novas do SAMU 100% para ${nome}, leitos no Instituto Estadual do Cérebro e Instituto de Olhos, e redução de filas por meio do CIS.`,
+      `Investimentos estruturantes na Região Metropolitana, assegurando ambulâncias novas do SAMU 100% para ${nome}, leitos na Duplicação do Instituto do Cérebro e Instituto de Olhos, e redução de filas por meio do CIS.`,
   },
 
   'Costa Verde': {
@@ -526,7 +526,7 @@ const CONFIG_REGIOES: Record<string, {
       'Apoio à Rede Hospitalar e Filantrópica: Suporte financeiro e pactuações para custeio de leitos em hospitais da região serrana',
       'Resgate Aeromédico da Saúde: Transporte ágil por helicóptero para traumas graves e áreas de difícil acesso na serra',
       'Regulação Inteligente no CIS: Monitoramento de leitos em tempo real com redução de 38,4% no tempo de espera',
-      'Instituto Estadual do Cérebro: Referência para casos neurológicos complexos e radiocirurgia Gamma Knife 100% SUS',
+      'Duplicação do Instituto do Cérebro: Referência para casos neurológicos complexos e radiocirurgia Gamma Knife 100% SUS',
     ],
     destaques: ['SAMU 100% Serra', 'Apoio Hospitalar', 'Resgate Aéreo', 'Regulação CIS'],
     resumo: (nome: string) =>
@@ -538,9 +538,9 @@ const CONFIG_REGIOES: Record<string, {
       `SAMU 100% na Região dos Lagos: Frota de ambulâncias novas reforçada em ${nome} para acolher moradores e absorver o aumento na alta temporada`,
       'Resgate Aeromédico da Saúde: Helicópteros de salvamento para socorro imediato em afogamentos, traumas graves e estradas litorâneas',
       'Regulação Central pelo CIS: Transferências ágeis de urgência e redução comprovada de quase 40% na fila de espera por leitos',
-      'Instituto Estadual do Cérebro: Retaguarda terciária e quaternária para procedimentos neurocirúrgicos de ponta pelo SUS',
+      'Duplicação do Instituto do Cérebro: Retaguarda terciária e quaternária para procedimentos neurocirúrgicos de ponta pelo SUS',
     ],
-    destaques: ['SAMU 100% Lagos', 'Resgate Aeromédico', 'Regulação CIS', 'Instituto do Cérebro'],
+    destaques: ['SAMU 100% Lagos', 'Resgate Aeromédico', 'Regulação CIS', 'Duplicação do IEC'],
     resumo: (nome: string) =>
       `Dr. Luizinho universalizou o socorro do SAMU 100% em ${nome} com suporte aeromédico estratégico para a Região dos Lagos e agilizou as transferências de urgência para leitos de retaguarda via CIS.`,
   },
@@ -550,9 +550,9 @@ const CONFIG_REGIOES: Record<string, {
       `SAMU 100% no Norte: Ambulâncias novas entregues com custeio garantido em ${nome}, cobrindo a sede e distritos`,
       'Apoio aos Polos e Hospitais Filantrópicos: Recursos federais e aportes da SES-RJ para manutenção de leitos de UTI e média/alta complexidade',
       'Regulação em Tempo Real no CIS: Redução auditada de 38,4% no tempo de espera por leitos de emergência',
-      'Instituto Estadual do Cérebro: Referência para cirurgias neurológicas complexas e radiocirurgia 100% gratuitas pelo SUS',
+      'Duplicação do Instituto do Cérebro: Referência para cirurgias neurológicas complexas e radiocirurgia 100% gratuitas pelo SUS',
     ],
-    destaques: ['SAMU 100% Norte', 'Apoio aos Hospitais', 'Regulação CIS', 'Instituto do Cérebro'],
+    destaques: ['SAMU 100% Norte', 'Apoio aos Hospitais', 'Regulação CIS', 'Duplicação do IEC'],
     resumo: (nome: string) =>
       `No Norte Fluminense, Dr. Luizinho garantiu ambulâncias novas do SAMU 100% em ${nome}, apoio contínuo à rede hospitalar filantrópica e agilidade histórica no acesso a leitos de UTI pelo CIS.`,
   },
@@ -562,9 +562,9 @@ const CONFIG_REGIOES: Record<string, {
       `SAMU 100% no Noroeste: Ambulâncias novas entregues cobrindo 100% das áreas urbanas, distritos e estradas rurais de ${nome}`,
       'Apoio aos Hospitais Filantrópicos Regionais: Parcerias para custeio de leitos de terapia intensiva e atendimento de urgência',
       'Regulação Inteligente no CIS: Redução de 38,4% no tempo de espera para transferências e leitos hospitalares de retaguarda',
-      'Instituto Estadual do Cérebro: Acesso universal ao tratamento de tumores cerebrais com radiocirurgia robótica pelo SUS',
+      'Duplicação do Instituto do Cérebro: Acesso universal ao tratamento de tumores cerebrais com radiocirurgia robótica pelo SUS',
     ],
-    destaques: ['SAMU 100% Noroeste', 'Hospitais Filantrópicos', 'Regulação CIS', 'Instituto do Cérebro'],
+    destaques: ['SAMU 100% Noroeste', 'Hospitais Filantrópicos', 'Regulação CIS', 'Duplicação do IEC'],
     resumo: (nome: string) =>
       `Dr. Luizinho assegurou socorro pré-hospitalar em ${nome} com o SAMU 100% em todas as regiões do município, apoio às unidades filantrópicas do Noroeste e redução na fila de regulação pelo CIS.`,
   },

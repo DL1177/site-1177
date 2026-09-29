@@ -215,8 +215,8 @@ export const ENTREGAS: Entrega[] = [
   },
   {
     id: 'ie-cerebro',
-    nome: 'Instituto Estadual do Cérebro',
-    subtitulo: 'Ampliação histórica do centro neurocirúrgico Paulo Niemeyer',
+    nome: 'Duplicação do Instituto do Cérebro',
+    subtitulo: 'Novo anexo de 6 andares e capacidade cirúrgica dobrada no Paulo Niemeyer',
     janela: 'J2',
     papel: 'entregou',
     status: 'verificado',
@@ -227,8 +227,8 @@ export const ENTREGAS: Entrega[] = [
     videoUrl: '/videos/ie-cerebro.mp4',
     videoDuracao: '1:19',
     municipioPrincipal: 'Rio de Janeiro (Centro)',
-    fraseOQueE: 'Entregou a ampliação histórica do Instituto Estadual do Cérebro, com novo anexo de 6 andares para neurocirurgias.',
-    fraseNumero: 'Mais de 100 leitos ativos, 54 vagas de UTI e capacidade duplicada para 240 cirurgias de alta complexidade por mês.',
+    fraseOQueE: 'Entregou a duplicação histórica do Instituto Estadual do Cérebro, com novo anexo de 6 andares para neurocirurgias.',
+    fraseNumero: 'Mais de 100 leitos ativos, 54 vagas de UTI e capacidade cirúrgica duplicada para 240 neurocirurgias de alta complexidade por mês.',
     fraseImpacto: 'Pacientes com tumores cerebrais graves ou aneurismas que antes não tinham esperança agora contam com neurocirurgias de padrão internacional 100% pelo SUS.',
     numeros: [
       {
