@@ -6,22 +6,20 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <section class="relative min-h-[85vh] lg:min-h-[88vh] flex items-center justify-center overflow-hidden bg-white text-slate-900 pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-slate-200/80">
   
-  <!-- Vídeo de Fundo Cinemático Bem Mais Visível -->
+  <!-- Foto de Campanha em Segundo Plano (Dr. Luizinho com a População Fluminense) -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <video
-      autoplay
-      loop
-      muted
-      playsinline
-      preload="auto"
-      class="w-full h-full object-cover opacity-80 md:opacity-85 filter contrast-105"
-    >
-      <source src={`${baseUrl}/video-deputado.mp4`} type="video/mp4" />
-    </video>
+    <img
+      src={`${baseUrl}/hero-campanha.webp`}
+      alt="Dr. Luizinho em carreata de campanha nas ruas com a população fluminense"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="w-full h-full object-cover object-[center_38%] opacity-80 md:opacity-85 filter contrast-105"
+    />
 
-    <!-- Scrim Suave Translúcido para Leitura Perfeita com Vídeo Nítido -->
-    <div class="absolute inset-0 bg-white/70 sm:bg-white/60"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30"></div>
+    <!-- Scrim Suave Translúcido para Leitura Perfeita com a Foto Nítida -->
+    <div class="absolute inset-0 bg-white/75 sm:bg-white/70"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-white/30"></div>
   </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
