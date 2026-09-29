@@ -115,11 +115,42 @@ const fotos: FotoItem[] = [
       </p>
     </div>
 
-    <!-- 3 Pilares Fundamentais em Grid 3 Colunas Moderno em Vidro Fosco -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
+    <!-- Abas / Segmented Control no Mobile (Opção 2: Pílulas Interativas) -->
+    <div class="md:hidden max-w-sm mx-auto mb-4 p-1.5 rounded-2xl bg-[#091b40]/90 border border-white/15 backdrop-blur-md flex gap-1.5 shadow-xl">
+      <button
+        type="button"
+        class="pilar-tab-btn flex-1 py-2 px-2 text-center rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 bg-[#F15A29] text-white shadow-md shadow-[#F15A29]/30"
+        data-index="0"
+        aria-selected="true"
+      >
+        <span class="text-orange-200">01</span>
+        <span>Médico</span>
+      </button>
+      <button
+        type="button"
+        class="pilar-tab-btn flex-1 py-2 px-2 text-center rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 text-blue-200 hover:text-white hover:bg-white/10"
+        data-index="1"
+        aria-selected="false"
+      >
+        <span class="opacity-70">02</span>
+        <span>Gestão</span>
+      </button>
+      <button
+        type="button"
+        class="pilar-tab-btn flex-1 py-2 px-2 text-center rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 text-blue-200 hover:text-white hover:bg-white/10"
+        data-index="2"
+        aria-selected="false"
+      >
+        <span class="opacity-70">03</span>
+        <span>Congresso</span>
+      </button>
+    </div>
+
+    <!-- 3 Pilares Fundamentais: Card Ativo no Mobile com Transição / Grid 3 Colunas no Desktop -->
+    <div id="pilares-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-4 md:mb-16">
       
       <!-- Card 01: Medicina -->
-      <div class="p-7 sm:p-8 rounded-3xl bg-[#112758]/90 backdrop-blur-md border border-white/10 shadow-2xl hover:border-[#F15A29]/50 transition-all duration-300 flex flex-col justify-between group">
+      <div id="pilar-0" class="pilar-card flex md:!flex flex-col justify-between p-7 sm:p-8 rounded-3xl bg-[#112758]/90 backdrop-blur-md border border-white/10 shadow-2xl hover:border-[#F15A29]/50 transition-all duration-300 group">
         <div>
           <div class="flex items-baseline gap-3 mb-4">
             <span class="font-display text-3xl sm:text-4xl font-black italic text-[#F15A29] leading-none">
@@ -143,7 +174,7 @@ const fotos: FotoItem[] = [
       </div>
 
       <!-- Card 02: Gestão -->
-      <div class="p-7 sm:p-8 rounded-3xl bg-[#112758]/90 backdrop-blur-md border border-white/10 shadow-2xl hover:border-[#F15A29]/50 transition-all duration-300 flex flex-col justify-between group">
+      <div id="pilar-1" class="pilar-card hidden md:!flex flex-col justify-between p-7 sm:p-8 rounded-3xl bg-[#112758]/90 backdrop-blur-md border border-white/10 shadow-2xl hover:border-[#F15A29]/50 transition-all duration-300 group">
         <div>
           <div class="flex items-baseline gap-3 mb-4">
             <span class="font-display text-3xl sm:text-4xl font-black italic text-[#F15A29] leading-none">
@@ -167,7 +198,7 @@ const fotos: FotoItem[] = [
       </div>
 
       <!-- Card 03: Mandato -->
-      <div class="p-7 sm:p-8 rounded-3xl bg-[#112758]/90 backdrop-blur-md border border-white/10 shadow-2xl hover:border-[#F15A29]/50 transition-all duration-300 flex flex-col justify-between group">
+      <div id="pilar-2" class="pilar-card hidden md:!flex flex-col justify-between p-7 sm:p-8 rounded-3xl bg-[#112758]/90 backdrop-blur-md border border-white/10 shadow-2xl hover:border-[#F15A29]/50 transition-all duration-300 group">
         <div>
           <div class="flex items-baseline gap-3 mb-4">
             <span class="font-display text-3xl sm:text-4xl font-black italic text-[#F15A29] leading-none">
@@ -192,6 +223,39 @@ const fotos: FotoItem[] = [
 
     </div>
 
+    <!-- Navegação Mobile dos 3 Pilares (Anterior / Dots / Próximo) -->
+    <div class="md:hidden flex items-center justify-between text-xs text-blue-200/90 mb-12 px-2">
+      <button
+        id="pilar-prev"
+        type="button"
+        class="flex items-center gap-1.5 text-slate-200 hover:text-white active:scale-95 transition-all cursor-pointer py-1.5 px-3 rounded-xl bg-white/10 border border-white/15 backdrop-blur-sm"
+        aria-label="Ver pilar anterior"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span>Anterior</span>
+      </button>
+
+      <div class="flex items-center gap-1.5">
+        <span class="pilar-dot h-2 rounded-full transition-all duration-300 w-5 bg-[#F15A29]" data-index="0"></span>
+        <span class="pilar-dot h-2 rounded-full transition-all duration-300 w-2 bg-white/20" data-index="1"></span>
+        <span class="pilar-dot h-2 rounded-full transition-all duration-300 w-2 bg-white/20" data-index="2"></span>
+      </div>
+
+      <button
+        id="pilar-next"
+        type="button"
+        class="flex items-center gap-1.5 text-slate-200 hover:text-white active:scale-95 transition-all cursor-pointer py-1.5 px-3 rounded-xl bg-white/10 border border-white/15 backdrop-blur-sm"
+        aria-label="Ver próximo pilar"
+      >
+        <span>Próximo</span>
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+
     <!-- Bloco Dedicado: Leis e Ações de Impacto Nacional no Congresso -->
     <div class="p-6 sm:p-10 rounded-3xl bg-[#0D2252]/80 backdrop-blur-md border border-white/15 shadow-2xl">
       <div class="max-w-2xl mb-8">
@@ -207,10 +271,21 @@ const fotos: FotoItem[] = [
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Dica de Deslize no Celular -->
+      <div class="md:hidden flex items-center justify-between text-xs font-semibold text-slate-300 mb-3 px-1">
+        <div class="flex items-center gap-1.5 text-xs text-slate-300">
+          <svg class="w-4 h-4 text-[#F15A29] animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+          <span>Arraste para o lado para ver todos os marcos</span>
+        </div>
+        <span class="text-orange-300 font-mono text-[11px] bg-white/10 px-2 py-0.5 rounded-full">6 marcos</span>
+      </div>
+
+      <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 overflow-x-auto md:overflow-visible pb-3 pt-1 snap-x snap-mandatory scroll-smooth hide-scrollbar -mx-2 px-2 sm:mx-0 sm:px-0" style="scrollbar-width: none; -ms-overflow-style: none;">
         
         <!-- Marco 01: Complexo Econômico-Industrial da Saúde -->
-        <div class="p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
+        <div class="snap-start shrink-0 w-[84vw] sm:w-[320px] md:w-auto p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
           <div>
             <span class="inline-block text-[11px] font-bold text-orange-300 uppercase tracking-wider mb-2">
               Lei Federal nº 15.471/2026 · PL 2.583/2020
@@ -229,7 +304,7 @@ const fotos: FotoItem[] = [
         </div>
 
         <!-- Marco 02: Enfrentamento da Covid-19 -->
-        <div class="p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
+        <div class="snap-start shrink-0 w-[84vw] sm:w-[320px] md:w-auto p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
           <div>
             <span class="inline-block text-[11px] font-bold text-orange-300 uppercase tracking-wider mb-2">
               Comissão Externa da Câmara dos Deputados (CEXCORVI)
@@ -248,7 +323,7 @@ const fotos: FotoItem[] = [
         </div>
 
         <!-- Marco 03: Pró-Leitos -->
-        <div class="p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
+        <div class="snap-start shrink-0 w-[84vw] sm:w-[320px] md:w-auto p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
           <div>
             <span class="inline-block text-[11px] font-bold text-orange-300 uppercase tracking-wider mb-2">
               Lei Federal nº 14.147/2021 · PL 1.010/2021
@@ -267,7 +342,7 @@ const fotos: FotoItem[] = [
         </div>
 
         <!-- Marco 04: Enamed -->
-        <div class="p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
+        <div class="snap-start shrink-0 w-[84vw] sm:w-[320px] md:w-auto p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
           <div>
             <span class="inline-block text-[11px] font-bold text-orange-300 uppercase tracking-wider mb-2">
               PL 785/2024 · Medida Provisória nº 1.370/2026
@@ -286,7 +361,7 @@ const fotos: FotoItem[] = [
         </div>
 
         <!-- Marco 05: Aposentadoria Especial Agentes Comunitários -->
-        <div class="p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
+        <div class="snap-start shrink-0 w-[84vw] sm:w-[320px] md:w-auto p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
           <div>
             <span class="inline-block text-[11px] font-bold text-orange-300 uppercase tracking-wider mb-2">
               Comissão Especial · PEC 14/2021
@@ -305,7 +380,7 @@ const fotos: FotoItem[] = [
         </div>
 
         <!-- Marco 06: Relator do PROPAG -->
-        <div class="p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
+        <div class="snap-start shrink-0 w-[84vw] sm:w-[320px] md:w-auto p-5 rounded-2xl bg-[#112758]/90 border border-white/10 hover:border-[#F15A29]/50 transition-all flex flex-col justify-between group">
           <div>
             <span class="inline-block text-[11px] font-bold text-orange-300 uppercase tracking-wider mb-2">
               Lei Complementar nº 212/2025 · PLP 121/2024
@@ -383,10 +458,106 @@ const fotos: FotoItem[] = [
     start();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupTrajetoriaSlideshow);
-  } else {
-    setupTrajetoriaSlideshow();
+  function setupPilaresTabs() {
+    const container = document.getElementById('pilares-container');
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.pilar-tab-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.pilar-card');
+    const dots = document.querySelectorAll<HTMLElement>('.pilar-dot');
+    const btnPrev = document.getElementById('pilar-prev');
+    const btnNext = document.getElementById('pilar-next');
+
+    if (!container || tabs.length === 0 || cards.length === 0) return;
+
+    let activeIndex = 0;
+    const total = cards.length;
+
+    function setPilar(index: number) {
+      activeIndex = (index + total) % total;
+
+      // Atualiza botões das abas no mobile
+      tabs.forEach((tab, idx) => {
+        const isSelected = idx === activeIndex;
+        tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        if (isSelected) {
+          tab.className = 'pilar-tab-btn flex-1 py-2 px-2 text-center rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 bg-[#F15A29] text-white shadow-md shadow-[#F15A29]/30';
+        } else {
+          tab.className = 'pilar-tab-btn flex-1 py-2 px-2 text-center rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 text-blue-200 hover:text-white hover:bg-white/10';
+        }
+      });
+
+      // Atualiza visibilidade dos cards no mobile (no desktop mantêm md:!flex)
+      cards.forEach((card, idx) => {
+        if (idx === activeIndex) {
+          card.classList.remove('hidden');
+          card.classList.add('flex');
+        } else {
+          card.classList.remove('flex');
+          card.classList.add('hidden');
+        }
+      });
+
+      // Atualiza dots de navegação
+      dots.forEach((dot, idx) => {
+        if (idx === activeIndex) {
+          dot.className = 'pilar-dot h-2 rounded-full transition-all duration-300 w-5 bg-[#F15A29]';
+        } else {
+          dot.className = 'pilar-dot h-2 rounded-full transition-all duration-300 w-2 bg-white/20';
+        }
+      });
+    }
+
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('click', () => setPilar(idx));
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-index') || '0', 10);
+        setPilar(idx);
+      });
+    });
+
+    btnPrev?.addEventListener('click', () => setPilar(activeIndex - 1));
+    btnNext?.addEventListener('click', () => setPilar(activeIndex + 1));
+
+    // Touch Swipe no mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    container.addEventListener('touchstart', (e) => {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchend', (e) => {
+      if (!e.changedTouches || !e.changedTouches[0]) return;
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      // Detecta deslize horizontal intencional (> 40px)
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          setPilar(activeIndex + 1); // Deslize para esquerda -> próximo
+        } else {
+          setPilar(activeIndex - 1); // Deslize para direita -> anterior
+        }
+      }
+    }, { passive: true });
   }
-  document.addEventListener('astro:page-load', setupTrajetoriaSlideshow);
+
+  function init() {
+    setupTrajetoriaSlideshow();
+    setupPilaresTabs();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  document.addEventListener('astro:page-load', init);
 </script>
