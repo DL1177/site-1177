@@ -56,13 +56,6 @@ const outrosEpisodios = EPISODIOS_SERIE.slice(1);
             <!-- Overlay escuro -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20 group-hover/thumb:from-black/60 transition-colors"></div>
 
-            <!-- Selo de Localização -->
-            <div class="absolute top-3 left-3 flex items-center gap-2">
-              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white/95 text-xs font-semibold">
-                {episodioDestaque.cidade}
-              </span>
-            </div>
-
             <!-- Botão Play Pulsante Central -->
             <div class="absolute inset-0 flex items-center justify-center">
               <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#F15A29] group-hover/thumb:bg-[#ff6f3d] text-white flex items-center justify-center shadow-xl shadow-orange-950/60 transform group-hover/thumb:scale-110 active:scale-95 transition-all">
@@ -82,11 +75,6 @@ const outrosEpisodios = EPISODIOS_SERIE.slice(1);
               <span class="px-3 py-0.5 rounded-full bg-orange-500/20 border border-orange-400/40 text-orange-300 text-xs font-bold uppercase tracking-wider">
                 {episodioDestaque.badge}
               </span>
-              {episodioDestaque.dataPublicacao && (
-                <span class="text-xs text-slate-300 font-medium">
-                  {episodioDestaque.dataPublicacao}
-                </span>
-              )}
             </div>
 
             <a
@@ -152,13 +140,6 @@ const outrosEpisodios = EPISODIOS_SERIE.slice(1);
 
               <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
 
-              <!-- Badge de Localização -->
-              <div class="absolute top-2.5 left-2.5 flex items-center gap-2">
-                <span class="px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md text-white text-xs font-semibold">
-                  {ep.cidade}
-                </span>
-              </div>
-
               <!-- Play Button Central -->
               <div class="absolute inset-0 flex items-center justify-center">
                 <div class="w-12 h-12 rounded-full bg-[#F15A29] text-white flex items-center justify-center shadow-lg shadow-black/40 transform group-hover:scale-110 active:scale-95 transition-all">
@@ -173,15 +154,10 @@ const outrosEpisodios = EPISODIOS_SERIE.slice(1);
             <!-- Corpo do Card -->
             <div class="p-5 flex flex-col justify-between flex-grow">
               <div>
-                <div class="flex items-center justify-between gap-2 mb-2">
+                <div class="flex items-center gap-2 mb-2">
                   <span class="text-xs font-bold text-orange-600 uppercase tracking-wider bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200/60">
                     {ep.badge}
                   </span>
-                  {ep.dataPublicacao && (
-                    <span class="text-xs text-slate-500 font-medium">
-                      {ep.dataPublicacao}
-                    </span>
-                  )}
                 </div>
 
                 <a
