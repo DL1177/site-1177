@@ -342,7 +342,7 @@ const fotosCidade = [
     }
 
     if (shareWa) {
-      let texto = `🏥 *O que o Dr. Luizinho fez por ${cidade.nome} (1177)*\n\n`;
+      let texto = `🏥 *Dr. Luizinho 1177 — Entregas que Atendem ${cidade.nome}*\n\n`;
       if (cidade.emendasPagas) {
         texto += `💰 *Recursos Destinados à Saúde:* ${cidade.emendasPagas}\n`;
       }
@@ -350,12 +350,17 @@ const fotosCidade = [
         texto += `🏗️ *Recursos Garantidos / Obras:* ${cidade.emendasGarantidas}\n`;
       }
       if (cidade.entregasDiretas && cidade.entregasDiretas.length > 0) {
-        texto += `\n📍 *Principais Entregas:*\n`;
-        cidade.entregasDiretas.slice(0, 3).forEach(e => {
-          texto += `• ${e}\n`;
+        texto += `\n📍 *Entregas que Atendem ${cidade.nome}:*\n`;
+        cidade.entregasDiretas.slice(0, 4).forEach(e => {
+          const partes = e.split(':');
+          if (partes.length > 1) {
+            texto += `• *${partes[0].trim()}:* ${partes.slice(1).join(':').trim()}\n`;
+          } else {
+            texto += `• ${e}\n`;
+          }
         });
       }
-      texto += `\n👉 *Veja o painel completo da nossa cidade:*\nhttps://felippejuan.github.io/site-1177/#minha-cidade`;
+      texto += `\n👉 *Veja o painel interativo de ${cidade.nome}:*\nhttps://felippejuan.github.io/site-1177/#minha-cidade`;
 
       shareWa.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
     }
