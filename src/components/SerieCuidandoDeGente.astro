@@ -137,17 +137,6 @@ const episodioInicial = EPISODIOS_SERIE[0]; // Episódio âncora inicial
               </svg>
               <span>Assistir no YouTube</span>
             </a>
-
-            <button
-              id="btn-play-theater"
-              type="button"
-              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-sans text-xs sm:text-sm font-semibold border border-white/20 hover:border-[#F15A29] transition-all cursor-pointer"
-            >
-              <svg class="w-4 h-4 fill-[#F15A29]" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-              <span>Tocar Aqui</span>
-            </button>
           </div>
 
         </div>
@@ -210,7 +199,7 @@ const episodioInicial = EPISODIOS_SERIE[0]; // Episódio âncora inicial
           return (
             <button
               type="button"
-              class={`playlist-item snap-start shrink-0 w-60 sm:w-64 text-left rounded-2xl border-2 transition-all p-2.5 bg-white cursor-pointer select-none group/item ${
+              class={`playlist-item snap-start shrink-0 w-64 sm:w-72 text-left rounded-2xl border-2 transition-all p-3 bg-white cursor-pointer select-none group/item ${
                 isPrimeiro
                   ? 'border-[#F15A29] ring-2 ring-[#F15A29]/20 shadow-md'
                   : 'border-slate-200/90 hover:border-slate-300 shadow-xs'
@@ -260,6 +249,9 @@ const episodioInicial = EPISODIOS_SERIE[0]; // Episódio âncora inicial
                 <h4 class="font-display text-sm font-black italic text-[#123F8F] leading-tight truncate group-hover/item:text-[#F15A29] transition-colors mt-0.5">
                   {ep.personagem}
                 </h4>
+                <p class="font-sans text-xs text-slate-600 line-clamp-2 mt-1 leading-snug font-normal">
+                  {ep.fraseImpacto}
+                </p>
               </div>
             </button>
           );
@@ -281,7 +273,6 @@ const episodioInicial = EPISODIOS_SERIE[0]; // Episódio âncora inicial
     const iframeWrapper = document.getElementById('player-iframe-wrapper');
     const iframe = document.getElementById('player-iframe') as HTMLIFrameElement;
     const btnPlayTrigger = document.getElementById('btn-play-trigger');
-    const btnPlayTheater = document.getElementById('btn-play-theater');
 
     const badgeEl = document.getElementById('player-badge');
     const personagemEl = document.getElementById('player-personagem');
@@ -305,12 +296,6 @@ const episodioInicial = EPISODIOS_SERIE[0]; // Episódio âncora inicial
       poster.classList.add('hidden');
       iframeWrapper.classList.remove('hidden');
       isPlaying = true;
-      if (btnPlayTheater) {
-        btnPlayTheater.innerHTML = `
-          <svg class="w-4 h-4 fill-emerald-400" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <span class="text-emerald-300 font-semibold">Reproduzindo</span>
-        `;
-      }
     }
 
     // Função para selecionar episódio da playlist
@@ -347,13 +332,13 @@ const episodioInicial = EPISODIOS_SERIE[0]; // Episódio âncora inicial
         const bIndex = btn.getAttribute('data-index') || '';
 
         if (isCurrent) {
-          btn.className = 'playlist-item snap-start shrink-0 w-60 sm:w-64 text-left rounded-2xl border-2 transition-all p-2.5 bg-white cursor-pointer select-none group/item border-[#F15A29] ring-2 ring-[#F15A29]/20 shadow-md';
+          btn.className = 'playlist-item snap-start shrink-0 w-64 sm:w-72 text-left rounded-2xl border-2 transition-all p-3 bg-white cursor-pointer select-none group/item border-[#F15A29] ring-2 ring-[#F15A29]/20 shadow-md';
           if (tag) {
             tag.className = 'playlist-status-tag px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#F15A29] text-white shadow-sm';
             tag.textContent = 'Em exibição';
           }
         } else {
-          btn.className = 'playlist-item snap-start shrink-0 w-60 sm:w-64 text-left rounded-2xl border-2 transition-all p-2.5 bg-white cursor-pointer select-none group/item border-slate-200/90 hover:border-slate-300 shadow-xs';
+          btn.className = 'playlist-item snap-start shrink-0 w-64 sm:w-72 text-left rounded-2xl border-2 transition-all p-3 bg-white cursor-pointer select-none group/item border-slate-200/90 hover:border-slate-300 shadow-xs';
           if (tag) {
             tag.className = 'playlist-status-tag px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/70 text-white/90 backdrop-blur-xs';
             tag.textContent = `Vídeo #${Number(bIndex) + 1}`;
@@ -372,10 +357,6 @@ const episodioInicial = EPISODIOS_SERIE[0]; // Episódio âncora inicial
 
     btnPlayTrigger?.addEventListener('click', (e) => {
       e.stopPropagation();
-      startVideo(currentYtId);
-    });
-
-    btnPlayTheater?.addEventListener('click', () => {
       startVideo(currentYtId);
     });
 
