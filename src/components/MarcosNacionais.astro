@@ -65,7 +65,7 @@ const MARCOS = [
 ];
 ---
 
-<section id="brasil" class="py-12 sm:py-16 md:py-20 bg-white relative border-b border-slate-200/80 overflow-hidden">
+<section id="brasil" class="py-12 sm:py-16 md:py-20 bg-slate-50 relative border-b border-slate-200 overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     
     <!-- Cabeçalho Editorial: Tag + Título Grande Porte + Subtítulo -->
@@ -118,7 +118,7 @@ const MARCOS = [
 
     <!-- Trilho do Carrossel com Efeito Peek (próximo card visível cortado na lateral) -->
     <div class="relative">
-      <div class="pointer-events-none absolute right-0 top-0 bottom-2 w-20 sm:w-28 bg-gradient-to-l from-white to-transparent z-10 hidden md:block"></div>
+      <div class="pointer-events-none absolute right-0 top-0 bottom-2 w-20 sm:w-28 bg-gradient-to-l from-slate-50 to-transparent z-10 hidden md:block"></div>
 
       <div
         id="marcos-track"
@@ -127,7 +127,7 @@ const MARCOS = [
       >
         {MARCOS.map((marco) => (
           <div class="snap-start shrink-0 w-[84vw] sm:w-[340px] lg:w-[370px]">
-            <article class="flex flex-col justify-between h-full bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-md shadow-slate-100 hover:shadow-xl hover:border-[#123F8F]/30 hover:-translate-y-1 transition-all duration-300 relative group">
+            <article class="flex flex-col justify-between h-full bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_32px_rgba(18,63,143,0.12)] hover:border-[#123F8F]/40 hover:-translate-y-1.5 transition-all duration-300 relative group">
               <div>
                 <!-- Topo: Ícone Institucional + Badge de Status -->
                 <div class="flex items-center justify-between gap-3 mb-5">
