@@ -135,12 +135,8 @@ const MARCOS = [
                     <div class="w-5 h-5 flex items-center justify-center" set:html={marco.iconeSvg} />
                   </div>
 
-                  <span class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
-                    marco.isLei
-                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/80'
-                      : 'bg-blue-50 text-[#123F8F] border border-blue-200/80'
-                  }`}>
-                    <span class={`w-1.5 h-1.5 rounded-full ${marco.isLei ? 'bg-emerald-500' : 'bg-[#123F8F]'}`}></span>
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                     {marco.badge}
                   </span>
                 </div>
