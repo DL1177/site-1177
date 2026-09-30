@@ -32,6 +32,8 @@ jobs:
 
       - name: Build Astro site
         run: npm run build
+        env:
+          DEPLOY_TARGET: gh-pages
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
