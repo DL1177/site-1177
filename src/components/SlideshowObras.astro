@@ -63,7 +63,7 @@ const fotosObras = [
 ];
 ---
 
-<div id="obras-slideshow" class="relative w-full h-80 sm:h-96 md:h-[460px] lg:h-[520px] overflow-hidden select-none bg-slate-950">
+<div id="obras-slideshow" class="relative w-full h-80 sm:h-96 md:h-[460px] lg:h-[520px] overflow-hidden select-none bg-white">
   
   {fotosObras.map((foto, index) => (
     <div
@@ -86,8 +86,8 @@ const fotosObras = [
   <!-- Gradiente sutil no topo para acabamento suave -->
   <div class="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/25 to-transparent pointer-events-none z-10"></div>
 
-  <!-- Gradiente na base fundindo com o fundo branco da seção #entregas -->
-  <div class="absolute inset-x-0 bottom-0 h-24 sm:h-32 md:h-40 bg-gradient-to-t from-white via-white/85 to-transparent pointer-events-none z-10"></div>
+  <!-- Gradiente na base fundindo com o fundo branco da seção #entregas (100% branco na base para eliminar qualquer linha) -->
+  <div class="absolute inset-x-0 -bottom-2 h-36 sm:h-44 md:h-52 bg-gradient-to-t from-white from-30% via-white/85 to-transparent pointer-events-none z-10"></div>
 
   <!-- Indicadores de Paginação Discretos no Topo Direito (Completamente afastados do centro e do título) -->
   <div class="absolute top-5 right-5 sm:top-6 sm:right-8 z-20 flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 pointer-events-auto shadow-lg">
