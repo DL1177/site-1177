@@ -525,7 +525,7 @@ export const ENTREGAS: Entrega[] = [
   },
   {
     id: 'uti-infantil-ricardo-cruz',
-    nome: 'UTI Pediátrica Hosp. Dr. Ricardo Cruz',
+    nome: 'UTI Pediátrica do Hospital Estadual Dr. Ricardo Cruz',
     subtitulo: 'Maior UTI infantil 100% pública do Brasil em Nova Iguaçu',
     janela: 'J2',
     papel: 'entregou',

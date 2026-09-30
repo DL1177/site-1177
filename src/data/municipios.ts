@@ -63,7 +63,7 @@ export const MUNICIPIOS: Municipio[] = [
       'SAMU 100% RJ: Novas viaturas e socorro pré-hospitalar com custeio garantido',
     ],
     destaques: ['R$ 33,8M Total', 'HTO Baixada', 'Hospital JK & UPA', 'SAMU 100%'],
-    resumoLocal: 'Mais de R$ 33,8 milhões consolidados para a saúde de Nilópolis, além de fundar o HTO Baixada — polo ortopédico de excelência estadual — e modernizar o complexo do Hospital e UPA JK.',
+    resumoLocal: 'Mais de R$ 33,8 milhões consolidados para a saúde de Nilópolis, além de entregar o HTO Baixada — polo ortopédico de excelência estadual — e modernizar o complexo do Hospital e UPA JK.',
   },
   {
     nome: 'Rio de Janeiro',
